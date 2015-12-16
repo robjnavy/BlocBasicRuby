@@ -13,7 +13,8 @@
      puts "2 - Create an entry"
      puts "3 - Search for an entry"
      puts "4 - Import entries from a CSV"
-     puts "5 - Exit"
+     puts "5 - View Entry Number n"
+     puts "6 - Exit"
      print "Enter your selection: "
 
      selection = gets.to_i
@@ -37,6 +38,8 @@
        read_csv
        main_menu
      when 5
+       display_entry
+     when 6
        puts "Good-bye!"
  # #8
        exit(0)
@@ -112,5 +115,32 @@
        puts "#{selection} is not a valid input"
        entries_submenu(entry)
      end
+   end
+   
+   def display_entry
+    system "clear"
+    print "Please input an entry number to search: "
+    entry_num = Integer(gets) rescue false
+    int_result=entry_num.is_a?(Integer)
+    if int_result==true && entry_num.to_i <= @address_book.entries.length
+     find_entry(entry_num)
+    else
+     system "clear"
+     puts "You have not entered a valid entry number"
+     main_menu
+    end
+   end
+   
+   def find_entry(entry_num)
+    system "clear"
+    puts "\nYou picked entry number #{entry_num}"
+    actual_entry=entry_num-1
+    @address_book.entries.each_with_index do |entry, index|
+     if index.to_i==actual_entry
+      puts entry
+     end
+    end
+    puts "\n"
+    main_menu
    end
  end
