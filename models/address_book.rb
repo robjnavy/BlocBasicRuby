@@ -53,6 +53,16 @@
      
     return nil
    end
+   
+   def iterative_search(name)
+    @entries.each_with_index do |row,index|
+     if @entries[index].name==name
+      return @entries[index]
+     else
+      return nil
+     end
+    end
+   end
  
      
  end

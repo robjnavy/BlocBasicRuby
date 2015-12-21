@@ -9,6 +9,24 @@ require_relative '../models/address_book'
     expect(entry.phone_number).to eq expected_number
     expect(entry.email).to eq expected_email
   end
+  describe "#iterative_search" do
+    it "searches Addressbook for a non-existant entry" do
+     book.import_from_csv("entries.csv")
+     entry = book.binary_search("Dan")
+     expect(entry).to be_nil
+    end
+    it "searches AddressBook for Bill" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Bill")
+       expect(entry).to be_a Entry
+       check_entry(entry, "Bill", "555-555-4854", "bill@blocmail.com")
+     end
+     it "searches AddressBook for Billy" do
+       book.import_from_csv("entries.csv")
+       entry = book.iterative_search("Billy")
+       expect(entry).to be_nil
+     end
+   end
    
    describe "#binary_search" do
     it "searches Addressbook for a non-existant entry" do
