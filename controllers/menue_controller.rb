@@ -15,6 +15,7 @@
      puts "4 - Import entries from a CSV"
      puts "5 - View Entry Number n"
      puts "6 - Exit"
+     puts "7 - Delete all entries"
      print "Enter your selection: "
 
      selection = gets.to_i
@@ -43,6 +44,10 @@
        puts "Good-bye!"
  # #8
        exit(0)
+     when 7
+       system "clear"
+       puts "Deleting all entries in address book"
+       nuke
  # #9
      else
        system "clear"
@@ -244,5 +249,16 @@
        puts entry.to_s
        search_submenu(entry)
      end
+   end
+   
+   
+   def nuke
+    entrynum=@address_book.entries.length
+    puts "Removing #{entrynum} from the address book"
+    sleep(1)
+    @address_book.entries.clear
+    entrynum=@address_book.entries.length
+    system "clear"
+    puts "There are #{entrynum} entries in the database"
    end
  end
